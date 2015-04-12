@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">Web</string>
+    <string name="input_url">请输入图片地址：</string>
+    <string name="bt_view_text">查看</string>
+
+</resources>
