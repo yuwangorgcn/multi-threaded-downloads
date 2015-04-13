@@ -1,36 +1,33 @@
 package com.example.web;
 
-import java.io.IOException;
-import java.net.SocketTimeoutException;
-
-import com.example.web.services.ImageUtil;
+import com.example.web.services.NetUtil;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class ImageViewerActivity extends Activity implements OnClickListener {
-	EditText et_address;
-	ImageView iv_images;
+public class HtmlViewerActivity extends Activity implements OnClickListener {
 	Button bt_view;
+	EditText et_address;
+	TextView tv_content;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_image_viewer);
+		setContentView(R.layout.activity_html_viewer);
 		findView();
 	}
 
 	private void findView() {
 		// TODO Auto-generated method stub
 		et_address = (EditText) findViewById(R.id.et_address);
-		iv_images = (ImageView) findViewById(R.id.iv_images);
+		tv_content = (TextView) findViewById(R.id.tv_content);
 		bt_view = (Button) findViewById(R.id.bt_view);
 		bt_view.setOnClickListener(this);
 	}
@@ -40,33 +37,25 @@ public class ImageViewerActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.bt_view:
-			//test:192.168.xxx.xxx:8080/tomcat.png
+			//test:192.168.xxx.xxx:8080/WebProject/NewFile.jsp
 			String address = et_address.getText().toString().trim();
 			if ("".equals(address)) {
 				Toast.makeText(this, "请填入图片地址", Toast.LENGTH_LONG).show();
 				return;
 			} else {
-
 				try {
-					Bitmap bitmap = ImageUtil.getImage(address);
-					iv_images.setImageBitmap(bitmap);
+					String html=NetUtil.getHtml(address);
+					tv_content.setText(html);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					if (e instanceof SocketTimeoutException) {
-						Toast.makeText(this, "网路连接超时", Toast.LENGTH_LONG)
-								.show();
-					} else if (e instanceof IOException) {
-						Toast.makeText(this, "读取数据错误", Toast.LENGTH_LONG)
-								.show();
-					} else {
-						Toast.makeText(this, "未知错误", Toast.LENGTH_LONG).show();
-					}
-
 					e.printStackTrace();
+					// Toast.LENGTH_LONG=1，Toast.LENGTH_SHORT=0
+					Toast.makeText(this, "获取数据失败", 0).show();
+					return;
 				}
+
 			}
 			break;
 		}
 	}
-
 }

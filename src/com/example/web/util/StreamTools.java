@@ -14,14 +14,14 @@ public class StreamTools {
 	public static byte[] getBytes(InputStream is) throws Exception {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		byte[] buffer = new byte[1024];
-		int length = 0;
-		length = is.read(buffer);
-		while (length != -1) {
-			bos.write(buffer, 0, length);
+		int len = 0;
+		while ((len = is.read(buffer)) != -1) {
+			bos.write(buffer, 0, len);
 		}
 		is.close();
 		bos.flush();
-		Log.v(TAG,bos.toByteArray().toString());
-		return bos.toByteArray();
+		byte[] result = bos.toByteArray();
+		System.out.println(new String(result));
+		return result;
 	}
 }

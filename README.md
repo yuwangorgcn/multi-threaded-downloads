@@ -14,3 +14,7 @@
 
 ### 内容
 * 查看网络图片[ImageViewerActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/ImageViewerActivity.java)
+```   
+	<uses-permission android:name="android.permission.INTERNET"/>
+```   
+* 查看html网页[HtmlViewerActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/HtmlViewerActivity.java)
