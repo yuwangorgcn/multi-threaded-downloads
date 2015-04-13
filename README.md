@@ -13,8 +13,15 @@
 5. 下载并安装[httpwatch](https://www.httpwatch.com/download/), 使用IE
 
 ### 内容
-* 查看网络图片[ImageViewerActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/ImageViewerActivity.java)
+* 查看网络图片
+	* [ImageViewerActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/ImageViewerActivity.java)
 ```   
 	<uses-permission android:name="android.permission.INTERNET"/>
 ```   
-* 查看html网页[HtmlViewerActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/HtmlViewerActivity.java)
+* 查看html网页
+	* [HtmlViewerActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/HtmlViewerActivity.java)
+	* 支持多编码
+```   
+	<uses-permission android:name="android.permission.INTERNET"/>
+```   
+* 
