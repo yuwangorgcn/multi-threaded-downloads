@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="server_url">http://192.168.1.101:8080/WebProject/info.xml</string>
+
+</resources>

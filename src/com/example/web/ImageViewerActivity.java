@@ -19,6 +19,7 @@ public class ImageViewerActivity extends Activity implements OnClickListener {
 	EditText et_address;
 	ImageView iv_images;
 	Button bt_view;
+	String address = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +41,8 @@ public class ImageViewerActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.bt_view:
-			//test:192.168.xxx.xxx:8080/tomcat.png
-			String address = et_address.getText().toString().trim();
+			// test:192.168.xxx.xxx:8080/tomcat.png
+			address = et_address.getText().toString().trim();
 			if ("".equals(address)) {
 				Toast.makeText(this, "请填入图片地址", Toast.LENGTH_LONG).show();
 				return;
@@ -53,20 +54,22 @@ public class ImageViewerActivity extends Activity implements OnClickListener {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					if (e instanceof SocketTimeoutException) {
-						Toast.makeText(this, "网路连接超时", Toast.LENGTH_LONG)
-								.show();
+						Toast.makeText(ImageViewerActivity.this, "网路连接超时",
+								Toast.LENGTH_LONG).show();
 					} else if (e instanceof IOException) {
-						Toast.makeText(this, "读取数据错误", Toast.LENGTH_LONG)
-								.show();
+						Toast.makeText(ImageViewerActivity.this, "读取数据错误",
+								Toast.LENGTH_LONG).show();
 					} else {
-						Toast.makeText(this, "未知错误", Toast.LENGTH_LONG).show();
+						Toast.makeText(ImageViewerActivity.this, "未知错误",
+								Toast.LENGTH_LONG).show();
 					}
 
 					e.printStackTrace();
 				}
+
 			}
 			break;
+
 		}
 	}
-
 }

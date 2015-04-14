@@ -9,6 +9,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:label="Tests for my app"
+        android:targetPackage="com.example.web" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -27,6 +32,10 @@
         </activity>
         <activity android:name="HtmlViewerActivity" >
         </activity>
+        <activity android:name="ListActivity" >
+        </activity>
+
+        <uses-library android:name="android.test.runner" />
     </application>
 
 </manifest>
