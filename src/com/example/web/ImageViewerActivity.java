@@ -7,6 +7,7 @@ import com.example.web.services.ImageUtil;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,29 +48,52 @@ public class ImageViewerActivity extends Activity implements OnClickListener {
 				Toast.makeText(this, "请填入图片地址", Toast.LENGTH_LONG).show();
 				return;
 			} else {
-
-				try {
-					Bitmap bitmap = ImageUtil.getImage(address);
-					iv_images.setImageBitmap(bitmap);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					if (e instanceof SocketTimeoutException) {
-						Toast.makeText(ImageViewerActivity.this, "网路连接超时",
-								Toast.LENGTH_LONG).show();
-					} else if (e instanceof IOException) {
-						Toast.makeText(ImageViewerActivity.this, "读取数据错误",
-								Toast.LENGTH_LONG).show();
-					} else {
-						Toast.makeText(ImageViewerActivity.this, "未知错误",
-								Toast.LENGTH_LONG).show();
-					}
-
-					e.printStackTrace();
-				}
-
+				new GetImageTask().execute(address);
 			}
 			break;
 
+		}
+	}
+
+	class GetImageTask extends AsyncTask<String, int[], Bitmap> {
+		Bitmap bitmap = null;
+
+		@Override
+		protected Bitmap doInBackground(String... params) {
+
+			try {
+				bitmap = ImageUtil.getImage(address);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				if (e instanceof SocketTimeoutException) {
+					Toast.makeText(ImageViewerActivity.this, "网路连接超时",
+							Toast.LENGTH_LONG).show();
+				} else if (e instanceof IOException) {
+					Toast.makeText(ImageViewerActivity.this, "读取数据错误",
+							Toast.LENGTH_LONG).show();
+				} else {
+					Toast.makeText(ImageViewerActivity.this, "未知错误",
+							Toast.LENGTH_LONG).show();
+				}
+
+				e.printStackTrace();
+			}
+
+			// Anything done here is in a seperate thread to the UI thread
+			// Do you download from here
+
+			// If you want to update the progress you can call
+			// publishProgress(int progress); // This passes to the
+			// onProgressUpdate method
+
+			return bitmap; // This passes the bitmap to the onPostExecute method
+		}
+
+		@Override
+		protected void onPostExecute(Bitmap bitmapResult) {
+			super.onPostExecute(bitmapResult);
+			// This is back on your UI thread - Add your image to your view
+			iv_images.setImageBitmap(bitmap);
 		}
 	}
 }
