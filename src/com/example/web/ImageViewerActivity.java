@@ -69,10 +69,10 @@ public class ImageViewerActivity extends Activity implements OnClickListener {
 		 * // 再背景中處理的耗時工作
 		 */
 		@Override
-		protected Bitmap doInBackground(String... params) {
+		protected Bitmap doInBackground(String... address) {
 
 			try {
-				bitmap = ImageUtil.getImage(address);
+				bitmap = ImageUtil.getImage(address[0]);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				if (e instanceof SocketTimeoutException) {

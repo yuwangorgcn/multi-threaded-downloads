@@ -12,6 +12,11 @@ import android.os.Message;
 import com.example.web.util.StreamTools;
 
 public class NetUtil {
+	/**
+	 * 获取网页html的数据
+	 * @param address
+	 * @param handler
+	 */
 	public static void getHtml(final String address, final Handler handler) {
 
 		new Thread(new Runnable() {
