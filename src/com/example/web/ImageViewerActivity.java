@@ -1,6 +1,7 @@
 package com.example.web;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.SocketTimeoutException;
 
 import com.example.web.services.ImageUtil;
@@ -55,9 +56,18 @@ public class ImageViewerActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	/**
+	 * <傳入參數, 處理中更新介面參數, 處理後傳出參數>
+	 * 
+	 * @author
+	 *
+	 */
 	class GetImageTask extends AsyncTask<String, int[], Bitmap> {
 		Bitmap bitmap = null;
 
+		/**
+		 * // 再背景中處理的耗時工作
+		 */
 		@Override
 		protected Bitmap doInBackground(String... params) {
 
@@ -66,34 +76,58 @@ public class ImageViewerActivity extends Activity implements OnClickListener {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				if (e instanceof SocketTimeoutException) {
-					Toast.makeText(ImageViewerActivity.this, "网路连接超时",
-							Toast.LENGTH_LONG).show();
+					//Toast.makeText(ImageViewerActivity.this, "网路连接超时",Toast.LENGTH_LONG).show();
 				} else if (e instanceof IOException) {
-					Toast.makeText(ImageViewerActivity.this, "读取数据错误",
-							Toast.LENGTH_LONG).show();
+					//Toast.makeText(ImageViewerActivity.this, "读取数据错误",Toast.LENGTH_LONG).show();
 				} else {
-					Toast.makeText(ImageViewerActivity.this, "未知错误",
-							Toast.LENGTH_LONG).show();
+					//Toast.makeText(ImageViewerActivity.this, "未知错误",Toast.LENGTH_LONG).show();
 				}
 
 				e.printStackTrace();
 			}
 
-			// Anything done here is in a seperate thread to the UI thread
-			// Do you download from here
-
-			// If you want to update the progress you can call
-			// publishProgress(int progress); // This passes to the
-			// onProgressUpdate method
-
-			return bitmap; // This passes the bitmap to the onPostExecute method
+			return bitmap;
 		}
 
+		/**
+		 * 背景工作處理"前"需作的事
+		 */
 		@Override
-		protected void onPostExecute(Bitmap bitmapResult) {
-			super.onPostExecute(bitmapResult);
-			// This is back on your UI thread - Add your image to your view
-			iv_images.setImageBitmap(bitmap);
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+
+		}
+
+		/**
+		 * 背景工作處理"中"更新的事
+		 */
+		@Override
+		protected void onProgressUpdate(int[]... values) {
+			// TODO Auto-generated method stub
+			super.onProgressUpdate(values);
+
+		}
+
+		/**
+		 * 背景工作處理完"後"需作的事
+		 */
+		@Override
+		protected void onPostExecute(Bitmap result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+
+			iv_images.setImageBitmap(result);
+		}
+
+		/**
+		 * 背景工作被"取消"時作的事，此時不作 onPostExecute(Bitmap result)
+		 */
+		@Override
+		protected void onCancelled() {
+			// TODO Auto-generated method stub
+			super.onCancelled();
+
 		}
 	}
 }

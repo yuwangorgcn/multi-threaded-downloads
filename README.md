@@ -16,12 +16,12 @@
 ```   
 	<uses-permission android:name="android.permission.INTERNET"/>
 ```   
-* 查看网络图片(asyncTask)
+* 查看网络图片(AsyncTask)
 	* [ImageViewerActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/ImageViewerActivity.java)
 
 * 查看html网页(handler/thread)
 	* [HtmlViewerActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/HtmlViewerActivity.java)
 	* 支持多编码 
-* 获取xml的数据并用listview呈现
+* 获取xml的数据并用listview呈现(AsyncTask)
 	* [ListActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/ListActivity.java)
 * 
