@@ -1,38 +1,33 @@
 package com.example.web;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.SocketTimeoutException;
 import java.util.List;
 
-import com.example.web.ImageViewerActivity.GetImageTask;
 import com.example.web.domain.Channel;
 import com.example.web.services.ChanneUtil;
 import com.example.web.services.ChannelService;
 import com.example.web.services.ImageUtil;
-import com.example.web.services.ImageUtil2;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ListActivity extends Activity {
 	private ListView lv;
 
 	private List<Channel> channelList;
 	private LayoutInflater inflater;
+	public static float density;
 	String TAG = "ListActivity";
 
 	@Override
@@ -43,6 +38,7 @@ public class ListActivity extends Activity {
 		// =(LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
 		inflater = LayoutInflater.from(this);
 		findView();
+		density = getDisplayDensity();
 		String address = getResources().getString(R.string.server_url);
 		new GetDataTask().execute(address);
 	}
@@ -50,6 +46,31 @@ public class ListActivity extends Activity {
 	private void findView() {
 		// TODO Auto-generated method stub
 		lv = (ListView) this.findViewById(R.id.lv);
+	}
+
+	/**
+	 * 
+	 * @return 屏幕的密度
+	 */
+	private float getDisplayDensity() {
+		// TODO Auto-generated method stub
+		// 取得DisplayMetrics数据
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		// 屏幕的宽度(像素)
+		int width = metrics.widthPixels;
+		// 屏幕的高度(像素)
+		int height = metrics.heightPixels;
+		// 屏幕的密度
+		float density = metrics.density;
+		// 屏幕的DPI
+		int dpi = metrics.densityDpi;
+
+		// Log.i("寬度", String.valueOf(width));
+		// Log.i("高度", String.valueOf(height));
+		// Log.i("密度", String.valueOf(density));
+		// Log.i("DPI", String.valueOf(dpi));
+		return density;
 	}
 
 	/**
@@ -150,7 +171,7 @@ public class ListActivity extends Activity {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
 			View view = inflater.inflate(R.layout.item_list, null);
-			ImageView iv_images = (ImageView) view.findViewById(R.id.iv_images);
+			WebView wv_images = (WebView) view.findViewById(R.id.wv_item);
 			TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
 			TextView tv_time = (TextView) view.findViewById(R.id.tv_time);
 			TextView tv_count = (TextView) view.findViewById(R.id.tv_count);
@@ -163,8 +184,26 @@ public class ListActivity extends Activity {
 
 			String address = channel.getIcon();
 			try {
-				Bitmap bitmap = ImageUtil.getImage(address);
-				iv_images.setImageBitmap(bitmap);
+				// Bitmap bitmap = ImageUtil.getImage(address);
+				// int imgWidth = bitmap.getWidth();
+				int imgWidth = 120;
+				// iv_images.setImageBitmap(bitmap);
+
+				wv_images.setBackgroundResource(R.drawable.default_item);
+				wv_images.loadUrl(address);
+
+				/**
+				 * item_list中的webview固定60*80(dip)<br>
+				 * px=dip*destiny<br>
+				 * 1.取得屏幕的destiny<br>
+				 * 2.取得图片的长或宽(px)<br>
+				 * 3.图片的缩放p%=(60*destiny)/图片的长 or (80*destiny)/图片的宽<br>
+				 * <br>
+				 * 因为p是百分比，所以要*100，因为是int，所以先*100再除，避免算出0
+				 */
+				int p = (100 * (80 * (int) density)) / imgWidth;
+				Log.v(TAG,p+"%");
+				wv_images.setInitialScale(p);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

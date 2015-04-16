@@ -12,7 +12,8 @@ public final class R {
     }
     public static final class drawable {
         public static final int background_item=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
+        public static final int default_item=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
         public static final int bt_html_viewer=0x7f060008;
@@ -21,7 +22,6 @@ public final class R {
         public static final int bt_view=0x7f060003;
         public static final int et_address=0x7f060001;
         public static final int iv_images=0x7f060005;
-        public static final int iv_item=0x7f06000a;
         public static final int lv=0x7f060006;
         public static final int scrollView1=0x7f060002;
         public static final int textView1=0x7f060000;
@@ -29,6 +29,7 @@ public final class R {
         public static final int tv_count=0x7f06000d;
         public static final int tv_name=0x7f06000b;
         public static final int tv_time=0x7f06000c;
+        public static final int wv_item=0x7f06000a;
     }
     public static final class layout {
         public static final int activity_html_viewer=0x7f030000;
