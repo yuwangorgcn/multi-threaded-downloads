@@ -13,15 +13,17 @@
 5. 下载并安装[httpwatch](https://www.httpwatch.com/download/), 使用IE
 
 ### 内容
-* 查看网络图片
+```   
+	<uses-permission android:name="android.permission.INTERNET"/>
+```   
+* 查看网络图片(AsyncTask)
 	* [ImageViewerActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/ImageViewerActivity.java)
-```   
-	<uses-permission android:name="android.permission.INTERNET"/>
-```   
-* 查看html网页
+
+* 查看html网页(handler/thread)
 	* [HtmlViewerActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/HtmlViewerActivity.java)
-	* 支持多编码
-```   
-	<uses-permission android:name="android.permission.INTERNET"/>
-```   
+	* 支持多编码 
+* 获取xml的数据并用listview呈现(webView)
+	* [ListActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/ListActivity.java)
+* 获取xml的数据并用listview呈现(imageView)
+* 先下载图片存到SD card,再读
 * 

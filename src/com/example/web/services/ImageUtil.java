@@ -12,7 +12,7 @@ import android.graphics.BitmapFactory;
 
 public class ImageUtil {
 	/**
-	 * 获取网路address地址对应的图片
+	 * 获取网路address地址对应的图片,搭配ansycTesk
 	 * 
 	 * @param address
 	 * @return

@@ -4,6 +4,9 @@ import com.example.web.services.NetUtil;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,9 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class HtmlViewerActivity extends Activity implements OnClickListener {
-	Button bt_view;
-	EditText et_address;
-	TextView tv_content;
+	private Button bt_view;
+	private EditText et_address;
+	private TextView tv_content;
+	String TAG = "HtmlViewerActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +41,16 @@ public class HtmlViewerActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.bt_view:
-			//test:192.168.xxx.xxx:8080/WebProject/NewFile.jsp
+			// test:192.168.xxx.xxx:8080/WebProject/NewFile.jsp
 			String address = et_address.getText().toString().trim();
+
 			if ("".equals(address)) {
 				Toast.makeText(this, "«ÎÃÓ»ÎÕº∆¨µÿ÷∑", Toast.LENGTH_LONG).show();
 				return;
 			} else {
 				try {
-					String html=NetUtil.getHtml(address);
-					tv_content.setText(html);
+					NetUtil.getHtml(address, myHandler);
+
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -58,4 +63,20 @@ public class HtmlViewerActivity extends Activity implements OnClickListener {
 			break;
 		}
 	}
+
+	/**
+	 * handler for send thread
+	 */
+	private Handler myHandler = new Handler() {
+		@Override
+		public void handleMessage(final Message msg) {
+
+			if (msg.what == 1) {
+				Bundle bundle = msg.getData();
+				String message = bundle.getString("MSG");
+				//Log.v(TAG, message);
+				tv_content.setText(message);
+			}
+		}
+	};
 }
