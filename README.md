@@ -22,6 +22,8 @@
 * 查看html网页(handler/thread)
 	* [HtmlViewerActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/HtmlViewerActivity.java)
 	* 支持多编码 
-* 获取xml的数据并用listview呈现(AsyncTask)
+* 获取xml的数据并用listview呈现(webView)
 	* [ListActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/ListActivity.java)
+* 获取xml的数据并用listview呈现(imageView)
+* 先下载图片存到SD card,再读
 * 
