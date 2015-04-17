@@ -25,5 +25,14 @@
 * 获取xml的数据并用listview呈现(webView)
 	* [ListActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/ListActivity.java)
 * 获取xml的数据并用listview呈现(imageView)
-* 先下载图片存到SD card,再读
+	* [ListFromSDActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/ListFromSDActivity.java)
+	* Android4.0以下(220,221 NetworkOnMainTread)
+	* 先下载图片存到SD card, 再使用缓存或重新下载图片
+	* ListView点击事件
+
+```   
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+```   
 * 

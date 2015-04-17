@@ -21,7 +21,7 @@ public class StreamTools {
 		is.close();
 		bos.flush();
 		byte[] result = bos.toByteArray();
-		System.out.println(new String(result));
+		//System.out.println(new String(result));
 		return result;
 	}
 }
