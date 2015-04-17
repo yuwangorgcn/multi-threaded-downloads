@@ -28,4 +28,10 @@
         android:layout_height="wrap_content"
         android:text="客户端获取数据(先存到SD card)" />
 
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get方式登陆" />
+
 </LinearLayout>

@@ -3,5 +3,8 @@
     <string name="app_name">Web</string>
     <string name="input_url">请输入地址：</string>
     <string name="bt_view_text">查看</string>
+    <string name="input_name">请输入姓名</string>
+    <string name="input_password">请输入密码</string>
+    <string name="bt_login">登陆</string>
 
 </resources>

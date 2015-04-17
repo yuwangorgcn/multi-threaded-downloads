@@ -1,65 +1,65 @@
 package com.example.web;
 
-import com.example.web.services.NetUtil;
+import com.example.web.services.DataService;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class HtmlViewerActivity extends Activity implements OnClickListener {
-	private Button bt_view;
-	private EditText et_address;
-	private TextView tv_content;
-	String TAG = "HtmlViewerActivity";
+public class LoginActivity extends Activity implements OnClickListener {
+
+	private final String TAG = "LoginActivity";
+
+	private EditText et_name, et_password;
+	private Button bt_login;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_html_viewer);
+		setContentView(R.layout.activity_login);
 		findView();
 	}
 
 	private void findView() {
 		// TODO Auto-generated method stub
-		et_address = (EditText) findViewById(R.id.et_address);
-		tv_content = (TextView) findViewById(R.id.tv_content);
-		bt_view = (Button) findViewById(R.id.bt_view);
-		bt_view.setOnClickListener(this);
+		et_name = (EditText) this.findViewById(R.id.et_name);
+		et_password = (EditText) this.findViewById(R.id.et_password);
+		bt_login = (Button) this.findViewById(R.id.bt_login);
+		bt_login.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-		case R.id.bt_view:
-			// test:192.168.xxx.xxx:8080/WebProject/NewFile.jsp
-			String address = et_address.getText().toString().trim();
+		case R.id.bt_login:
+			String name = et_name.getText().toString().trim();
+			String password = et_password.getText().toString().trim();
 
-			if ("".equals(address)) {
-				Toast.makeText(this, "请填入图片地址", Toast.LENGTH_LONG).show();
+			if ("".equals(name) || "".equals(password)) {
+
+				Toast.makeText(this, "用户姓名或密码不得为空", 0).show();
+
 				return;
 			} else {
+				// 通过get请求发送数据到服务器
+				String path = getResources().getString(R.string.serlet_url);
 				try {
-					NetUtil.getHtml(address, myHandler);
+					DataService.sendDataByGet(path, name, password, myHandler);
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					// Toast.LENGTH_LONG=1，Toast.LENGTH_SHORT=0
-					Toast.makeText(this, "获取数据失败", 0).show();
-					return;
+					Toast.makeText(this, "访问网路异常", 0).show();
 				}
-
 			}
+
 			break;
 		}
 	}
@@ -75,12 +75,13 @@ public class HtmlViewerActivity extends Activity implements OnClickListener {
 				Bundle bundle = msg.getData();
 				String message = bundle.getString("MSG");
 				// Log.v(TAG, message);
-				tv_content.setText(message);
+
+				Toast.makeText(LoginActivity.this, message, 0).show();
+
 			} else if (msg.what == 0) {
 				Bundle bundle = msg.getData();
 				String message = bundle.getString("MSG");
-				// Log.v(TAG, message);
-				Toast.makeText(HtmlViewerActivity.this, message, 0).show();
+				Toast.makeText(LoginActivity.this, message, 0).show();
 			}
 		}
 	};

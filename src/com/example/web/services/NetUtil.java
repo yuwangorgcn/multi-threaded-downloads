@@ -14,6 +14,7 @@ import com.example.web.util.StreamTools;
 public class NetUtil {
 	/**
 	 * 获取网页html的数据
+	 * 
 	 * @param address
 	 * @param handler
 	 */
@@ -45,23 +46,36 @@ public class NetUtil {
 						} else {
 							content = temp;
 						}
-
+						sendMessage(1, content, handler);
 					} else {
-						throw new IllegalStateException("访问网路失败");
+						sendMessage(0, "访问网路失败" + code, handler);
+						// throw new IllegalStateException("访问网路失败");
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
+					sendMessage(0, e.toString(), handler);
 				}
-				Message msg = new Message();
-				Bundle bundle = new Bundle();
-				bundle.putString("MSG", content);
-				msg.setData(bundle);
-				msg.what = 1;
-				handler.sendMessage(msg);
 
 			}
 		}).start();
 
+	}
+
+	/**
+	 * 传送handler信息
+	 * 
+	 * @param msgCode
+	 * @param msgContent
+	 * @param handler
+	 */
+	private static void sendMessage(int msgCode, String msgContent,
+			Handler handler) {
+		Message msg = new Message();
+		Bundle bundle = new Bundle();
+		bundle.putString("MSG", msgContent);
+		msg.setData(bundle);
+		msg.what = msgCode;
+		handler.sendMessage(msg);
 	}
 
 }

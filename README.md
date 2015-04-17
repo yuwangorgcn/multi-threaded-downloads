@@ -18,7 +18,6 @@
 ```   
 * 查看网络图片(AsyncTask)
 	* [ImageViewerActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/ImageViewerActivity.java)
-
 * 查看html网页(handler/thread)
 	* [HtmlViewerActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/HtmlViewerActivity.java)
 	* 支持多编码 
@@ -26,7 +25,7 @@
 	* [ListActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/ListActivity.java)
 * 获取xml的数据并用listview呈现(imageView)
 	* [ListFromSDActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/ListFromSDActivity.java)
-	* Android4.0以下(220,221 NetworkOnMainTread)
+	* Android4.0以上(220,221 NetworkOnMainTread)
 	* 先下载图片存到SD card, 再使用缓存或重新下载图片
 	* ListView点击事件
 
@@ -35,4 +34,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 ```   
+* 以Get方式提交数据到服务器
+	* [LoginActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/LoginActivity.java)
 * 

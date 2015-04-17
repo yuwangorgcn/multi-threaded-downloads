@@ -9,6 +9,7 @@ import java.net.URL;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.os.Handler;
 
 import com.example.web.util.StreamTools;
 
@@ -21,7 +22,8 @@ public class SaveImagesToSDUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public static Bitmap getImage(String address) throws Exception {
+	public static Bitmap getImage(String address)
+			throws Exception {
 		// 通过代码模拟浏览器访问图片的流程
 		// http://xxx.xxx/a.jpg, 取得最后的a.jpg当作命名
 		int start = address.lastIndexOf("/");
