@@ -35,5 +35,6 @@
 
 ```   
 * 以Get/Post方式提交数据到服务器
+	* 两种方法:HttpURLConnection()和HttpClient()
 	* [LoginActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/LoginActivity.java)
 * 

@@ -17,7 +17,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private final String TAG = "LoginActivity";
 
 	private EditText et_name, et_password;
-	private Button bt_get_login, bt_post_login;
+	private Button bt_get_login, bt_post_login, bt_httpclient_get_login,
+			bt_httpclient_post_login;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,12 @@ public class LoginActivity extends Activity implements OnClickListener {
 		bt_get_login.setOnClickListener(this);
 		bt_post_login = (Button) this.findViewById(R.id.bt_post_login);
 		bt_post_login.setOnClickListener(this);
+		bt_httpclient_get_login = (Button) this
+				.findViewById(R.id.bt_httpclient_get_login);
+		bt_httpclient_get_login.setOnClickListener(this);
+		bt_httpclient_post_login = (Button) this
+				.findViewById(R.id.bt_httpclient_post_login);
+		bt_httpclient_post_login.setOnClickListener(this);
 	}
 
 	@Override
@@ -53,7 +60,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 				// 通过get请求发送数据到服务器
 				String path = getResources().getString(R.string.serlet_url);
 				try {
-					DataService.sendDataByGet(path, name, password, getHandler);
+					DataService.sendDataByGet(path, name, password, myHandler);
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -75,7 +82,49 @@ public class LoginActivity extends Activity implements OnClickListener {
 				String path = getResources().getString(R.string.serlet_url);
 				try {
 					DataService.sendDataByPost(path, name, password,
-							postHandler);
+							myHandler);
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					Toast.makeText(this, "访问网路异常", 0).show();
+				}
+			}
+
+			break;
+		case R.id.bt_httpclient_get_login:
+
+			if ("".equals(name) || "".equals(password)) {
+
+				Toast.makeText(this, "用户姓名或密码不得为空", 0).show();
+
+				return;
+			} else {
+				// 通过get请求发送数据到服务器
+				String path = getResources().getString(R.string.serlet_url);
+				try {
+					DataService.sendDataByHttpClientGet(path, name, password, myHandler);
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					Toast.makeText(this, "访问网路异常", 0).show();
+				}
+			}
+
+			break;
+		case R.id.bt_httpclient_post_login:
+
+			if ("".equals(name) || "".equals(password)) {
+
+				Toast.makeText(this, "用户姓名或密码不得为空", 0).show();
+
+				return;
+			} else {
+				// 通过get请求发送数据到服务器
+				String path = getResources().getString(R.string.serlet_url);
+				try {
+					DataService.sendDataByPost(path, name, password, myHandler);
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -92,7 +141,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 	/**
 	 * handler for send thread
 	 */
-	private Handler getHandler = new Handler() {
+	private Handler myHandler = new Handler() {
 		@Override
 		public void handleMessage(final Message msg) {
 
@@ -111,25 +160,4 @@ public class LoginActivity extends Activity implements OnClickListener {
 		}
 	};
 
-	/**
-	 * handler for send thread
-	 */
-	private Handler postHandler = new Handler() {
-		@Override
-		public void handleMessage(final Message msg) {
-
-			if (msg.what == 1) {
-				Bundle bundle = msg.getData();
-				String message = bundle.getString("MSG");
-				// Log.v(TAG, message);
-
-				Toast.makeText(LoginActivity.this, message, 0).show();
-
-			} else if (msg.what == 0) {
-				Bundle bundle = msg.getData();
-				String message = bundle.getString("MSG");
-				Toast.makeText(LoginActivity.this, message, 0).show();
-			}
-		}
-	};
 }
