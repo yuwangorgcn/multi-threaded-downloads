@@ -23,11 +23,23 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/bt_login"
+            android:id="@+id/bt_get_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="@string/bt_login" />
+            android:text="@string/bt_get_login" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/bt_post_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/bt_post_login" />
     </RelativeLayout>
 
 </LinearLayout>

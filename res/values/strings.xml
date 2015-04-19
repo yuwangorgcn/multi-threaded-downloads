@@ -5,6 +5,7 @@
     <string name="bt_view_text">查看</string>
     <string name="input_name">请输入姓名</string>
     <string name="input_password">请输入密码</string>
-    <string name="bt_login">登陆</string>
+    <string name="bt_get_login">采用get方式登陆</string>
+    <string name="bt_post_login">采用post方式登陆</string>
 
 </resources>
