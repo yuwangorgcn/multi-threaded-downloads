@@ -124,7 +124,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 				// 通过get请求发送数据到服务器
 				String path = getResources().getString(R.string.serlet_url);
 				try {
-					DataService.sendDataByPost(path, name, password, myHandler);
+					DataService.sendDataByHttpClientPost(path, name, password, myHandler);
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

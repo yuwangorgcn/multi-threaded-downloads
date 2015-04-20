@@ -7,11 +7,17 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -156,8 +162,8 @@ public class DataService {
 			@Override
 			public void run() {
 				try {
+					// 解决输入中文乱码
 					String param1 = URLEncoder.encode(name, "utf-8");
-
 					String param2 = URLEncoder.encode(password, "utf-8");
 					// 格式
 					// http://localhost:8080/web/LoginServlet?name=xxx&password=xxx
@@ -170,6 +176,58 @@ public class DataService {
 
 					// 3.敲回车发请求
 					HttpResponse response = client.execute(httpGet);
+					int code = response.getStatusLine().getStatusCode();
+					if (code == 200) {
+						InputStream is = response.getEntity().getContent();
+						byte[] result = StreamTools.getBytes(is);
+						sendMessage(1, new String(result), handler);
+					} else {
+						sendMessage(0, "服务器状态异常:" + code, handler);
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					sendMessage(0, e.toString(), handler);
+				}
+
+			}
+		}).start();
+	}
+
+	/**
+	 * httpclient 浏览器的简单包装<br>
+	 * new HttpClient就相当于得到一个浏览器<br>
+	 * 通过post请求提交数据到服务器
+	 * 
+	 * @param path
+	 * @param name
+	 * @param password
+	 * @param handler
+	 */
+	public static void sendDataByHttpClientPost(final String path,
+			final String name, final String password, final Handler handler) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+
+					// 1.获取一个浏览器的实例
+					HttpClient client = new DefaultHttpClient();
+					// 2.准备请求的地址
+					HttpPost httppost = new HttpPost(path);
+					// 键值对
+					List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+					parameters.add(new BasicNameValuePair("name", name));
+					parameters
+							.add(new BasicNameValuePair("password", password));
+					// 解决输入中文乱码
+					UrlEncodedFormEntity entity = new UrlEncodedFormEntity(
+							parameters, "utf-8");
+					// 3.设置post请求的数据实体
+					httppost.setEntity(entity);
+					// 4.发送数据个服务器
+					HttpResponse response = client.execute(httppost);
+
 					int code = response.getStatusLine().getStatusCode();
 					if (code == 200) {
 						InputStream is = response.getEntity().getContent();
