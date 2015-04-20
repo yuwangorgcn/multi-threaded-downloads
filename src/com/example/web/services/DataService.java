@@ -1,5 +1,6 @@
 package com.example.web.services;
 
+import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
@@ -10,6 +11,11 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.multipart.FilePart;
+import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
+import org.apache.commons.httpclient.methods.multipart.Part;
+import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -242,6 +248,54 @@ public class DataService {
 					sendMessage(0, e.toString(), handler);
 				}
 
+			}
+		}).start();
+	}
+
+	/**
+	 * httpclient 浏览器的简单包装<br>
+	 * new HttpClient就相当于得到一个浏览器<br>
+	 * 夹带文件并通过post请求提交数据到服务器
+	 * 
+	 * @param path
+	 * @param name
+	 * @param password
+	 * @param filePath
+	 * @param handler
+	 */
+	public static void sendDataWithFileByHttpClient(final String path,
+			final String name, final String password, final String filePath,
+			final Handler handler) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					// 实例化上传数据的数组 Part[]
+					Part[] parts = { new StringPart("name", name),
+							new StringPart("password", password),
+							new FilePart("file", new File(filePath)) };
+					PostMethod filePost = new PostMethod(path);
+
+					filePost.setRequestEntity(new MultipartRequestEntity(parts,
+							filePost.getParams()));
+					org.apache.commons.httpclient.HttpClient client = new org.apache.commons.httpclient.HttpClient();
+
+					client.getHttpConnectionManager().getParams()
+							.setConnectionTimeout(5000);
+					int code = client.executeMethod(filePost);
+					if (code == 200) {
+						String res = new String(filePost.getResponseBody());
+						sendMessage(1, res, handler);
+					} else {
+						sendMessage(0, "服务器状态异常:" + code, handler);
+					}
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					sendMessage(0, e.toString(), handler);
+				}
+				// finally filePost.releaseConnection();
 			}
 		}).start();
 	}

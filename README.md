@@ -36,5 +36,6 @@
 ```   
 * 以Get/Post方式提交数据到服务器
 	* 两种方法:HttpURLConnection()和HttpClient()
+	* 可用HttpClient()夹带文件上传
 	* [LoginActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/LoginActivity.java)
 * 

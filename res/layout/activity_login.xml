@@ -18,6 +18,13 @@
         android:hint="@string/input_password" >
     </EditText>
 
+    <EditText
+        android:id="@+id/et_file_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/input_file" >
+    </EditText>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -64,6 +71,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="@string/bt_httpclient_post_login" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/bt_httpclient_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/bt_httpclient_login" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -16,9 +16,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 	private final String TAG = "LoginActivity";
 
-	private EditText et_name, et_password;
+	private EditText et_name, et_password, et_file_path;
 	private Button bt_get_login, bt_post_login, bt_httpclient_get_login,
-			bt_httpclient_post_login;
+			bt_httpclient_post_login, bt_httpclient_login;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		et_name = (EditText) this.findViewById(R.id.et_name);
 		et_password = (EditText) this.findViewById(R.id.et_password);
+		et_file_path = (EditText) this.findViewById(R.id.et_file_path);
 		bt_get_login = (Button) this.findViewById(R.id.bt_get_login);
 		bt_get_login.setOnClickListener(this);
 		bt_post_login = (Button) this.findViewById(R.id.bt_post_login);
@@ -41,6 +42,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 		bt_httpclient_post_login = (Button) this
 				.findViewById(R.id.bt_httpclient_post_login);
 		bt_httpclient_post_login.setOnClickListener(this);
+		bt_httpclient_login = (Button) this
+				.findViewById(R.id.bt_httpclient_login);
+		bt_httpclient_login.setOnClickListener(this);
 	}
 
 	@Override
@@ -81,8 +85,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 				// 通过get请求发送数据到服务器
 				String path = getResources().getString(R.string.serlet_url);
 				try {
-					DataService.sendDataByPost(path, name, password,
-							myHandler);
+					DataService.sendDataByPost(path, name, password, myHandler);
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -103,7 +106,8 @@ public class LoginActivity extends Activity implements OnClickListener {
 				// 通过get请求发送数据到服务器
 				String path = getResources().getString(R.string.serlet_url);
 				try {
-					DataService.sendDataByHttpClientGet(path, name, password, myHandler);
+					DataService.sendDataByHttpClientGet(path, name, password,
+							myHandler);
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -124,7 +128,35 @@ public class LoginActivity extends Activity implements OnClickListener {
 				// 通过get请求发送数据到服务器
 				String path = getResources().getString(R.string.serlet_url);
 				try {
-					DataService.sendDataByHttpClientPost(path, name, password, myHandler);
+					DataService.sendDataByHttpClientPost(path, name, password,
+							myHandler);
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					Toast.makeText(this, "访问网路异常", 0).show();
+				}
+			}
+
+			break;
+
+		case R.id.bt_httpclient_login:
+			String filePath = et_file_path.getText().toString().trim();
+			if ("".equals(name) || "".equals(password)) {
+
+				Toast.makeText(this, "用户姓名或密码不得为空", 0).show();
+
+				return;
+			} else if ("".equals(filePath)) {
+				Toast.makeText(this, "文件路径不得为空", 0).show();
+
+				return;
+			} else {
+				// 通过get请求发送数据到服务器
+				String path = getResources().getString(R.string.serlet_url);
+				try {
+					DataService.sendDataWithFileByHttpClient(path, name,
+							password, filePath, myHandler);
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
