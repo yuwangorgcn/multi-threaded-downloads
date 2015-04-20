@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends Activity implements OnClickListener {
 	private Button bt_image_viewer, bt_html_viewer, bt_list_viewer,
-			bt_list_viewer_sd, bt_login;
+			bt_list_viewer_sd, bt_login, bt_phone;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		bt_list_viewer_sd.setOnClickListener(this);
 		bt_login = (Button) findViewById(R.id.bt_login);
 		bt_login.setOnClickListener(this);
+		bt_phone = (Button) findViewById(R.id.bt_phone);
+		bt_phone.setOnClickListener(this);
 	}
 
 	@Override
@@ -60,6 +62,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.bt_login:
 			// 相應按鈕的點擊事件
 			intent.setClass(MainActivity.this, LoginActivity.class);
+			startActivity(intent);
+			break;
+		case R.id.bt_phone:
+			// 相應按鈕的點擊事件
+			intent.setClass(MainActivity.this, PhoneActivity.class);
 			startActivity(intent);
 			break;
 		}

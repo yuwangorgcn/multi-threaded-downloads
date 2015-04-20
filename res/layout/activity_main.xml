@@ -34,4 +34,10 @@
         android:layout_height="wrap_content"
         android:text="Get/Post方式登陆" />
 
+    <Button
+        android:id="@+id/bt_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="webservice获取电话号码归属地" />
+
 </LinearLayout>

@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.example.web.util.Config;
 import com.example.web.util.StreamTools;
 
 /**
@@ -74,12 +75,12 @@ public class DataService {
 					InputStream is = conn.getInputStream();
 					byte[] result = StreamTools.getBytes(is);
 
-					sendMessage(1, new String(result), handler);
+					sendMessage(Config.SENT_SUCCESSFULLY, new String(result), handler);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 
-					sendMessage(0, e.toString(), handler);
+					sendMessage(Config.FAILED_TO_SEND, e.toString(), handler);
 				}
 
 			}
@@ -134,16 +135,16 @@ public class DataService {
 					if (code == 200) {
 						InputStream is = conn.getInputStream();
 						byte[] result = StreamTools.getBytes(is);
-						sendMessage(1, new String(result), handler);
+						sendMessage(Config.SENT_SUCCESSFULLY, new String(result), handler);
 					} else {
-						sendMessage(0, "服务器状态异常:" + code, handler);
+						sendMessage(Config.FAILED_TO_SEND, "服务器状态异常:" + code, handler);
 					}
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 
-					sendMessage(0, e.toString(), handler);
+					sendMessage(Config.FAILED_TO_SEND, e.toString(), handler);
 				}
 
 			}
@@ -186,14 +187,14 @@ public class DataService {
 					if (code == 200) {
 						InputStream is = response.getEntity().getContent();
 						byte[] result = StreamTools.getBytes(is);
-						sendMessage(1, new String(result), handler);
+						sendMessage(Config.SENT_SUCCESSFULLY, new String(result), handler);
 					} else {
-						sendMessage(0, "服务器状态异常:" + code, handler);
+						sendMessage(Config.FAILED_TO_SEND, "服务器状态异常:" + code, handler);
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					sendMessage(0, e.toString(), handler);
+					sendMessage(Config.FAILED_TO_SEND, e.toString(), handler);
 				}
 
 			}
@@ -238,14 +239,14 @@ public class DataService {
 					if (code == 200) {
 						InputStream is = response.getEntity().getContent();
 						byte[] result = StreamTools.getBytes(is);
-						sendMessage(1, new String(result), handler);
+						sendMessage(Config.SENT_SUCCESSFULLY, new String(result), handler);
 					} else {
-						sendMessage(0, "服务器状态异常:" + code, handler);
+						sendMessage(Config.FAILED_TO_SEND, "服务器状态异常:" + code, handler);
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					sendMessage(0, e.toString(), handler);
+					sendMessage(Config.FAILED_TO_SEND, e.toString(), handler);
 				}
 
 			}
@@ -285,9 +286,9 @@ public class DataService {
 					int code = client.executeMethod(filePost);
 					if (code == 200) {
 						String res = new String(filePost.getResponseBody());
-						sendMessage(1, res, handler);
+						sendMessage(Config.SENT_SUCCESSFULLY, res, handler);
 					} else {
-						sendMessage(0, "服务器状态异常:" + code, handler);
+						sendMessage(Config.FAILED_TO_SEND, "服务器状态异常:" + code, handler);
 					}
 
 				} catch (Exception e) {

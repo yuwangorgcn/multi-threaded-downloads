@@ -1,6 +1,7 @@
 package com.example.web;
 
 import com.example.web.services.DataService;
+import com.example.web.util.Config;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -177,14 +178,14 @@ public class LoginActivity extends Activity implements OnClickListener {
 		@Override
 		public void handleMessage(final Message msg) {
 
-			if (msg.what == 1) {
+			if (msg.what == Config.SENT_SUCCESSFULLY) {
 				Bundle bundle = msg.getData();
 				String message = bundle.getString("MSG");
 				// Log.v(TAG, message);
 
 				Toast.makeText(LoginActivity.this, message, 0).show();
 
-			} else if (msg.what == 0) {
+			} else if (msg.what == Config.FAILED_TO_SEND) {
 				Bundle bundle = msg.getData();
 				String message = bundle.getString("MSG");
 				Toast.makeText(LoginActivity.this, message, 0).show();

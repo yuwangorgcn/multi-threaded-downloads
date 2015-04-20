@@ -38,4 +38,8 @@
 	* 两种方法:HttpURLConnection()和HttpClient()
 	* 可用HttpClient()夹带文件上传
 	* [LoginActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/LoginActivity.java)
+* 调用webservice获取电话号码归属地
+	* (webservice来源,SOAP 1.2)[http://webservice.webxml.com.cn/WebServices/MobileCodeWS.asmx?op=getMobileCodeInfo]
+	* 不断重复点击应用程序会crash
+	* [PhoneActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/PhoneActivity.java)
 * 
