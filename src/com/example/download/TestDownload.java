@@ -12,11 +12,10 @@ import java.net.URL;
 import org.omg.CORBA.PRIVATE_MEMBER;
 
 public class TestDownload {
-	private static final String path = "http://192.168.1.101:8080/youdao.exe";
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		URL url = new URL(path);
+		URL url = new URL(Config.path);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
 		conn.setConnectTimeout(5000);
@@ -35,7 +34,7 @@ public class TestDownload {
 			 * "rwd" 打开以便读取和写入，对于 "rw"，还要求对文件内容的每个更新都同步写入到底层存储设备。
 			 */
 			// 产生一个跟服务器文件大小一致的空文件
-			RandomAccessFile file = new RandomAccessFile(getFileName(path),
+			RandomAccessFile file = new RandomAccessFile(getFileName(Config.path),
 					"rwd");
 			// 1.在本地创建一个文件 文件大小要跟服务器文件的大小一致
 			file.setLength(length);
@@ -57,7 +56,7 @@ public class TestDownload {
 					endPosition = length;
 				}
 
-				DownloadTask task = new DownloadTask(i, path, startPosition,
+				DownloadTask task = new DownloadTask(i, Config.path, startPosition,
 						endPosition);
 				task.start();
 
@@ -75,7 +74,6 @@ public class TestDownload {
 }
 
 class DownloadTask extends Thread {
-	private static final String path = "http://192.168.1.101:8080/youdao.exe";
 
 	int threadId;
 	String filePath;// 档案路径
@@ -122,7 +120,7 @@ class DownloadTask extends Thread {
 					"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36 Edge/12.0");
 			InputStream is = conn.getInputStream();
 
-			RandomAccessFile file = new RandomAccessFile(getFileName(path),
+			RandomAccessFile file = new RandomAccessFile(getFileName(Config.path),
 					"rwd");
 			// 设置数据从那个位置开始写
 			file.seek(startPosition);
