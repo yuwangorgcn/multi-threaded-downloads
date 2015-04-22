@@ -39,7 +39,15 @@
 	* 可用HttpClient()夹带文件上传
 	* [LoginActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/LoginActivity.java)
 * 调用webservice获取电话号码归属地
-	* (webservice来源,SOAP 1.2)[http://webservice.webxml.com.cn/WebServices/MobileCodeWS.asmx?op=getMobileCodeInfo]
+	* [webservice来源,SOAP 1.2](http://webservice.webxml.com.cn/WebServices/MobileCodeWS.asmx?op=getMobileCodeInfo)
 	* 不断重复点击应用程序会crash
 	* [PhoneActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/PhoneActivity.java)
+* 多线程断点下载
+	* android2.2适用
+	* [MutiDownloadActivity](https://github.com/JetAircraft/Web-toolkits/blob/master/src/com/example/web/MutiDownloadActivity.java)
+```   
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+```  
 * 

@@ -11,5 +11,10 @@
     <string name="bt_httpclient_get_login">采用HttpClientGet方式登陆</string>
     <string name="bt_httpclient_post_login">采用HttpClientPost方式登陆</string>
     <string name="bt_httpclient_login">采用HttpClient夹带文件的方式登陆</string>
+    <string name="download">下载</string>
+    <string name="start_downloading">开始下载</string>
+    <string name="is_downloading">正在下载...</string>
+    <string name="pause">暂停</string>
+    <string name="input_download_url">请输入下载文件的路径</string>
 
 </resources>

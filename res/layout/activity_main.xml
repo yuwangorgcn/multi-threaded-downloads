@@ -4,40 +4,58 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/bt_image_viewer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="网络图片查看器" />
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-    <Button
-        android:id="@+id/bt_html_viewer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="网页html查看器" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/bt_list_viewer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="客户端获取数据" />
+            <Button
+                android:id="@+id/bt_image_viewer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="网络图片查看器" />
 
-    <Button
-        android:id="@+id/bt_list_viewer_sd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="客户端获取数据(先存到SD card)" />
+            <Button
+                android:id="@+id/bt_html_viewer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="网页html查看器" />
 
-    <Button
-        android:id="@+id/bt_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get/Post方式登陆" />
+            <Button
+                android:id="@+id/bt_list_viewer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="客户端获取数据" />
 
-    <Button
-        android:id="@+id/bt_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="webservice获取电话号码归属地" />
+            <Button
+                android:id="@+id/bt_list_viewer_sd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="客户端获取数据(先存到SD card)" />
+
+            <Button
+                android:id="@+id/bt_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get/Post方式登陆" />
+
+            <Button
+                android:id="@+id/bt_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="webservice获取电话号码归属地" />
+
+            <Button
+                android:id="@+id/bt_muti_download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="多线程断点下载" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

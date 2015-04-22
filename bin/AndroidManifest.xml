@@ -42,6 +42,8 @@
         </activity>
         <activity android:name="PhoneActivity" >
         </activity>
+        <activity android:name="MutiDownloadActivity" >
+        </activity>
 
         <uses-library android:name="android.test.runner" />
     </application>
